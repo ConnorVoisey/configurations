@@ -39,3 +39,24 @@ sudo apt install apt-transport-https
 sudo apt update
 sudo apt install code
 ```
+
+## Other
+
+```sh
+sudo apt-get install bat
+```
+
+```sh
+sudo apt install exa
+```
+
+starship
+
+```sh
+sudo apt-get install curl
+curl -sS https://starship.rs/install.sh | sh
+```
+
+```sh
+sudo apt-get install ripgrep
+```
