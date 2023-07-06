@@ -60,3 +60,18 @@ curl -sS https://starship.rs/install.sh | sh
 ```sh
 sudo apt-get install ripgrep
 ```
+
+## Cast to screen
+
+```sh
+sudo apt install flatpak
+sudo apt install gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+restart session
+
+```sh
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub org.gnome.NetworkDisplays
+```
