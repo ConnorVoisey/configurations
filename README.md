@@ -45,7 +45,7 @@ sudo apt-get update
 sudo apt-get install neovim 
 ```
 
-[Docker](https://docs.docker.com/engine/install/ubuntu/)
+[Docker](https://docs.docker.com/engine/install/ubuntu/) - you may need to restart 
 
 ```sh
 sudo apt-get update
@@ -59,6 +59,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo usermod -a -G docker $USER
 ```
 
 vs code
