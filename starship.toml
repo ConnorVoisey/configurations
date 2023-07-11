@@ -1,0 +1,168 @@
+# Get editor completions based on the config schema
+#"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+ [](#c678dd)\
+ $os\
+ $username[](bg:#61afef fg:#c678dd)\
+ $directory[](fg:#61afef bg:#e86671)\
+ $git_branch\
+ $git_status[](fg:#e86671 bg:#e5c07b)\
+ $c\
+ $php\
+ $elixir\
+ $nodejs\
+ $elm\
+ $lua\
+ $golang\
+ $haskell\
+ $java\
+ $kotlin\
+ $julia\
+ $nim\
+ $rust\
+ $dotnet\
+ $python\
+ $package\
+ $vagrant[](fg:#e5c07b bg:#56b6c2)\
+ $docker_context[](fg:#56b6c2 bg:#98c379)\
+ $time[ ](fg:#98c379)\
+ $all\
+ $character """
+
+add_newline = true
+
+[line_break]
+disabled = false
+
+[status]
+disabled = false
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#98c379 fg:#222222"
+format = '[ $time ]($style)'
+
+[memory_usage]
+disabled = false
+threshold = 75
+
+[character]
+disabled = false
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+[git_branch]
+style = "bg:#e86671 fg:#222222"
+format = '[ on $symbol$branch ]($style)'
+disabled = false
+
+[git_status]
+style = "bg:#e86671 fg:#222222"
+format = '[$all_status$ahead_behind ]($style)'
+disabled = false
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+format = "[$symbol $percentage]($style) "
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[directory]
+style = "bg:#61afef fg:#222222"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = ".../"
+
+[directory.substitutions]
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[sudo]
+disabled = false
+
+[username]
+show_always = true
+style_user = "bg:#c678dd fg:#222222"
+style_root = "bg:#c678dd fg:#222222"
+format = '[$user ]($style)'
+disabled = false
+
+[package]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[vagrant]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[nodejs]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[python]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[lua]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[golang]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[kotlin]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[php]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[dotnet]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[haskell]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[java]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[julia]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[nim]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[rust]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[elixir]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[elm]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[c]
+style = "bg:#e5c07b fg:#222222"
+format = '[ $symbol($version) ]($style)'
+
+[docker_context]
+style = "bg:#56b6c2 fg:#222222"
+format = '[ $symbol$context ]($style) $path'
+

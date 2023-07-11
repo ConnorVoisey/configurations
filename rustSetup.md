@@ -20,3 +20,15 @@ Example usage - runs project on file change
 ```sh
 cargo watch -x r
 ```
+
+postgres dependencies
+
+```sh
+apt install pkg-config
+```
+
+libssl-dev
+
+```sh
+sudo apt-get install libssl-dev
+```
