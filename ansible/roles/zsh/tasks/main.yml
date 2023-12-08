@@ -10,6 +10,7 @@
     apt:
       name: zsh
       state: present
+    become: true
 
   - name: pull zsh auto complete
     git:
