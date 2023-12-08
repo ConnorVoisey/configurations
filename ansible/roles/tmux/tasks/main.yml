@@ -32,8 +32,6 @@
       git:
         repo: 'https://github.com/tmux-plugins/tpm'
         dest: $HOME/.tmux/plugins/tpm
-    - name: source tmux
-      command: tmux source ~/.config/tmux/tmux.conf
   become: false
 
 - block:
