@@ -1,0 +1,32 @@
+---
+
+- block:
+  - name: Creates zsh dir
+    ansible.builtin.file:
+      path: $HOME/code/zsh
+      state: directory
+
+  - name: install zsh
+    apt:
+      name: zsh
+      state: present
+
+  - name: pull zsh auto complete
+    git:
+      repo: 'https://github.com/marlonrichert/zsh-autocomplete.git'
+      dest: $HOME/code/zsh/zsh-autocomplete
+  - name: pull zsh syntax highlighting
+    git:
+      repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+      dest: $HOME/code/zsh/zsh-syntax-highlighting
+
+  - name: pull .zshrc
+    get_url:
+      url: 'https://raw.githubusercontent.com/ConnorVoisey/configurations/main/.zshrc'
+      dest: $HOME/.zshrc
+
+  - name: Set login shell of user {{ ansible_env.USER }} to `/bin/zsh` with `usermod`
+    ansible.builtin.command: usermod --shell /bin/zsh {{ ansible_env.USER }}
+    become: true
+    changed_when: false
+

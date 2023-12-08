@@ -1,0 +1,10 @@
+---
+- name: Setup development enviroment
+  hosts: local
+  roles:
+    - nvim
+    - git
+    - zsh
+    - starship
+    - rust
+    - tmux

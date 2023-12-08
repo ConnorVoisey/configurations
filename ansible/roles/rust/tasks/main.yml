@@ -1,0 +1,39 @@
+---
+
+- block:
+  - name: Download Rust installer script
+    get_url:
+      url: https://sh.rustup.rs
+      dest: /tmp/rust_install.sh
+      mode: 'u+x'
+  - name: Run Rust installer script
+    shell: /tmp/rust_install.sh -y
+
+  - name: pull cargo cargo-binstall
+    get_url:
+      url: 'https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh'
+      dest: /tmp/binstaller.sh
+      mode: 'u+rwx'
+
+  - name: Run the install script
+    shell: /tmp/binstaller.sh -y
+  
+  - name: Remove the binstaller-installer.sh
+    file:
+      path: /tmp/binstaller.sh
+      state: absent
+
+  - name: install postgres dependency
+    apt: name="pkg-config" state="present"
+    become: true
+  - name: install libssl-dev
+    apt: name="libssl-dev" state="present"
+    become: true
+
+- block:
+  - name: install cargo watch
+    command: $HOME/.cargo/bin/cargo binstall cargo-watch -y
+  - name: install bat
+    command: $HOME/.cargo/bin/cargo binstall bat -y
+  - name: install exa
+    command: $HOME/.cargo/bin/cargo binstall exa -y

@@ -1,0 +1,64 @@
+---
+- block:
+    - name: install tmux dependencies
+      apt:
+        pkg:
+          - libevent-dev
+          - ncurses-dev
+          - build-essential
+          - bison
+          - pkg-config
+        state: present
+
+    - name: install tmux
+      apt:
+        name: tmux
+        state: present
+
+  become: true
+  become_user: root
+
+- block:
+    - name: create tmux config dir
+      ansible.builtin.file:
+        path: $HOME/.config/tmux
+        state: directory
+
+    - name: copy tmux config
+      copy:
+        src: '../../../../tmux.conf'
+        dest: $HOME/.config/tmux/tmux.conf
+    - name: pull tmux tpm (plugin manager)
+      git:
+        repo: 'https://github.com/tmux-plugins/tpm'
+        dest: $HOME/.tmux/plugins/tpm
+    - name: source tmux
+      command: tmux source ~/.config/tmux/tmux.conf
+  become: false
+
+- block:
+    - name: check if oh my zsh is already installed
+      stat: 
+        path: $HOME/.oh-my-zsh
+      register: oh_my_zsh_status
+
+- block:
+    - name: Download oh my zsh installer
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /tmp/oh-my-zsh-installer.sh
+        mode: 'u+rwx'
+      when: installed.rc != 0
+      register: download
+    
+    - name: Run the install script
+      shell: /tmp/oh-my-zsh-installer.sh -y
+      when: download.changed
+    
+    - name: Remove the installer
+      file:
+        path: /tmp/oh-my-zsh-installer.sh
+        state: absent
+  become: false
+  when: not oh_my_zsh_status.stat.exists
+
