@@ -38,18 +38,9 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
+    - name: Add the current user to the docker group
+      user:
+        name: "{{ lookup('env', 'USER') }}"
+        groups: docker
+        append: yes
   become: true
-
-- block: 
-    - name: Install nvm
-      ansible.builtin.shell: >
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-      args:
-        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
-
-    - name: install and use node 20 and make the default latest
-      shell: ". {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 20 && nvm use 20 && nvm alias default node"
-
-    - name: install bun
-      ansible.builtin.shell: curl -fsSL https://bun.sh/install | bash
-  become: false
