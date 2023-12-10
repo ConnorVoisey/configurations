@@ -19,3 +19,7 @@ Run the playbook inside the configurations directory
 ```sh
 ansible-playbook main.yml -i inventory -K
 ```
+
+Once the playbook has been run there are still a few things that need to be done manually
+
+Reload tmux config: press ```Ctrl``` and ```space```, let go then press ```I```.
