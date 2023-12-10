@@ -1,5 +1,11 @@
 # ansible setup
 
+Use this to auto install
+
+```sh
+curl -L https://raw.githubusercontent.com/ConnorVoisey/configurations/main/ansible/auto_setup.sh | sh
+```
+
 Prerequisites
 
 ```sh
