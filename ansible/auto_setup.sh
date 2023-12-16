@@ -5,4 +5,5 @@ sudo apt install ansible -y
 git clone https://github.com/ConnorVoisey/configurations.git $HOME/configurations
 
 cd $HOME/configurations/ansible
-ansible-playbook main.yml -i inventory -K
+
+$HOME/configurations/ansible/run-playbook.sh

@@ -1,6 +1,9 @@
 ---
 
 - block:
+    - name: debug env
+      debug:
+        msg: "INSTALL PHP: {{ INSTALL_PHP }}"
     - name: add php repo
       apt_repository:
         repo: ppa:ondrej/php
@@ -109,6 +112,7 @@
         - php8.2-bcmath
         - php8.2-xdebug
         - php8.2-pgsql
+      when: INSTALL_PHP
 
   become: true
   become_user: root
