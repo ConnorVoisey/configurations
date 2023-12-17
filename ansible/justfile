@@ -1,0 +1,5 @@
+set dotenv-load
+set export
+
+setup:
+    ansible-playbook main.yml -i inventory -K
