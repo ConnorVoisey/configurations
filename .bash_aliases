@@ -1,0 +1,7 @@
+alias l='ls -lah'
+alias ls='exa'
+alias art='php artisan'
+alias dkc='docker compose'
+alias dkcp='docker compose -f docker-compose.prod.yml'
+alias dk='docker'
+alias c='clear'
