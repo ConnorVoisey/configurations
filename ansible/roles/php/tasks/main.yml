@@ -1,9 +1,6 @@
 ---
 
 - block:
-    - name: debug env
-      debug:
-        msg: "INSTALL PHP: {{ INSTALL_PHP }}"
     - name: add php repo
       apt_repository:
         repo: ppa:ondrej/php
@@ -14,7 +11,11 @@
         name: software-properties-common
         state: latest
         update_cache: true
+  when: INSTALL_PHP
+  become: true
+  become_user: root
 
+- block:
     - name: install prerequisites
       apt: name={{ item }} update_cache=yes state=latest
       with_items:
@@ -112,8 +113,8 @@
         - php8.2-bcmath
         - php8.2-xdebug
         - php8.2-pgsql
-      when: INSTALL_PHP
 
+  when: INSTALL_PHP
   become: true
   become_user: root
 
@@ -123,6 +124,9 @@
         url: https://getcomposer.org/download/latest-stable/composer.phar
         dest: /usr/bin/composer
         mode: '0755'
+  when: INSTALL_PHP
+  become: true
+  become_user: root
 
   become: true
   become_user: root
