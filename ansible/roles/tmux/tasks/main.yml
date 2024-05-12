@@ -34,29 +34,29 @@
         dest: $HOME/.tmux/plugins/tpm
   become: false
 
-- block:
-    - name: check if oh my zsh is already installed
-      stat: 
-        path: $HOME/.oh-my-zsh
-      register: oh_my_zsh_status
-
-- block:
-    - name: Download oh my zsh installer
-      get_url:
-        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-        dest: /tmp/oh-my-zsh-installer.sh
-        mode: 'u+rwx'
-      when: installed.rc != 0
-      register: download
-    
-    - name: Run the install script
-      shell: /tmp/oh-my-zsh-installer.sh -y
-      when: download.changed
-    
-    - name: Remove the installer
-      file:
-        path: /tmp/oh-my-zsh-installer.sh
-        state: absent
-  become: false
-  when: not oh_my_zsh_status.stat.exists
-
+# - block:
+#     - name: check if oh my zsh is already installed
+#       stat: 
+#         path: $HOME/.oh-my-zsh
+#       register: oh_my_zsh_status
+#
+# - block:
+#     - name: Download oh my zsh installer
+#       get_url:
+#         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+#         dest: /tmp/oh-my-zsh-installer.sh
+#         mode: 'u+rwx'
+#       when: installed.rc != 0
+#       register: download
+#     
+#     - name: Run the install script
+#       shell: /tmp/oh-my-zsh-installer.sh -y
+#       when: download.changed
+#     
+#     - name: Remove the installer
+#       file:
+#         path: /tmp/oh-my-zsh-installer.sh
+#         state: absent
+#   become: false
+#   when: not oh_my_zsh_status.stat.exists
+#

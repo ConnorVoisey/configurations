@@ -9,7 +9,7 @@
       apt: name="neovim" state="present"
 
     - name: use nvim for editor
-      alternatives: name=editor path=/usr/bin/nvim
+      community.general.alternatives: name=editor path=/usr/bin/nvim
 
   become: true
   become_user: root
@@ -19,15 +19,3 @@
       git:
         repo: "{{nvim_config_git_url}}"
         dest: "{{neovim_config_dir}}"
-    - name: pull packer
-      git:
-        repo: "https://github.com/wbthomason/packer.nvim"
-        dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-    - name: packer install twice - first
-      shell: nvim --headless -c 'PackerSync' -c 'qa'
-    - name: packer install twice - second
-      shell: nvim --headless -c 'PackerSync' -c 'qa'
-
-    - name: Install Packer plugins
-      command: nvim "+silent! PackerInstall!" +qall!

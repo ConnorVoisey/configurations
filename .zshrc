@@ -14,6 +14,7 @@ _fix_cursor() {
    echo -ne '\e[5 q'
 }
 precmd_functions+=(_fix_cursor)
+# fpath=(~/.just-zsh $fpath)
 
 source ~/code/zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 eval "$(starship init zsh)"
@@ -33,6 +34,7 @@ bindkey -e
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+
 
 # Use modern completion system
 autoload -Uz compinit
@@ -58,13 +60,15 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 compdef _just just
 
+# fpath+=~/.zsh/completions
+
 plugins=(tmux)
 ZSH_TMUX_AUTOSTART=true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /home/connor/code/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/code/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $HOME/.bash_aliases
 source $HOME/export-esp.sh
@@ -73,13 +77,37 @@ source $HOME/export-esp.sh
 # source $ZSH/oh-my-zsh.sh
 
 # bun completions
-[ -s "/home/connor/.bun/_bun" ] && source "/home/connor/.bun/_bun"
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=${PATH}:`go env GOPATH`/bin
 export PATH=${PATH}:"$HOME/.config/composer/vendor/bin"
 
-[ -f "/home/connor/.ghcup/env" ] && source "/home/connor/.ghcup/env" # ghcup-env
+[ -f "~/.ghcup/env" ] && source "~/.ghcup/env" # ghcup-env
+
+# pnpm
+export PNPM_HOME="~/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export EDITOR=nvim
+export PATH=$PATH:~/.local/bin
+eval $(thefuck --alias)
+
+# opam configuration
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+export PATH=$PATH:~/Downloads/roc_nightly-linux_x86_64-2024-03-25-4dca054
+export PATH=~/.cache/rebar3/bin:$PATH
+
+eval "$(atuin init zsh)"

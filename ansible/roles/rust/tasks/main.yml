@@ -39,3 +39,5 @@
     command: $HOME/.cargo/bin/cargo binstall exa -y
   - name: install sqlx-cli
     command: $HOME/.cargo/bin/cargo binstall sqlx-cli -y
+  - name: install atuin
+    command: $HOME/.cargo/bin/cargo binstall atuin -y

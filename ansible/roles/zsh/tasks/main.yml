@@ -21,10 +21,15 @@
       repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
       dest: $HOME/code/zsh/zsh-syntax-highlighting
 
-  - name: pull .zshrc
-    get_url:
-      url: 'https://raw.githubusercontent.com/ConnorVoisey/configurations/main/.zshrc'
-      dest: $HOME/.zshrc
+  - name: cp .zshrc
+    ansible.builtin.copy:
+      src: '../.zshrc'
+      dest: '$HOME/.zshrc'
+
+  - name: cp .bash_aliases
+    ansible.builtin.copy:
+      src: '../.bash_aliases'
+      dest: '$HOME/.bash_aliases'
 
   - name: Set login shell of user {{ ansible_env.USER }} to `/bin/zsh` with `usermod`
     ansible.builtin.command: usermod --shell /bin/zsh {{ ansible_env.USER }}

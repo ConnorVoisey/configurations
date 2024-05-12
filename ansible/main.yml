@@ -1,16 +1,20 @@
 ---
-- hosts: local
-  become: true
+- hosts: all
+  become: false
   pre_tasks:
-    - name: Loading environment variables
-      tags: always
-      set_fact:
-        TESTING_ENV_IS_LOADED: '{{ lookup("env", "TESTING_ENV_IS_LOADED") == "true" }}'
-        INSTALL_PHP: '{{ lookup("env", "INSTALL_PHP") == "true" }}'
-    - name: Check if env variables are loaded correctly
-      fail: 
-        msg: "Env variable 'TESTING_ENV_IS_LOADED' is not set. This should be set in the .env file. Make sure to run this playbook with the enviroment variables, this can be done with the just command"
-      when: not TESTING_ENV_IS_LOADED
+    - debug:
+        msg: 'Executing as user {{ ansible_user_id }}'
+    - debug:
+        msg: 'PWD {{ playbook_dir }}'
+    # - name: Loading environment variables
+    #   tags: always
+    #   set_fact:
+    #     TESTING_ENV_IS_LOADED: '{{ lookup("env", "TESTING_ENV_IS_LOADED") == "true" }}'
+    #     INSTALL_PHP: '{{ lookup("env", "INSTALL_PHP") == "true" }}'
+    # - name: Check if env variables are loaded correctly
+    #   fail: 
+    #     msg: "Env variable 'TESTING_ENV_IS_LOADED' is not set. This should be set in the .env file. Make sure to run this playbook with the environment variables, this can be done with the just command"
+    #   when: not TESTING_ENV_IS_LOADED
 
   roles:
     - nvim
